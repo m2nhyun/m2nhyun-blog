@@ -5,11 +5,11 @@ export default function DashBoard() {
   return (
     <>
       <div></div>
-      <div className="z-10 w-full justify-between text-sm lg:flex p-10 font-sans">
+      <div className="z-10 w-full justify-between text-sm lg:flex p-10 font-sans ">
         <Link href={"/"}>
-          <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:p-4 lg:dark:bg-zinc-800/30">
+          <div className="text-2xl fixed left-0 top-0 flex w-full justify-center border-gray-300 from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:p-4 lg:dark:bg-zinc-800/30">
             Minhyun
-          </p>
+          </div>
         </Link>
 
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none gap-5">

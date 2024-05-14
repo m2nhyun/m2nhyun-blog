@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 // import { Inter } from "next/font/google";
-import "./globals.css";
-import DashBoard from "./dashboard/page";
+import './globals.css';
+import DashBoard from './dashboard/page';
 
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MinHyun_Blog",
-  description: "next app",
+  title: 'MinHyun_Blog',
+  description: 'next app',
 };
 
 export default function BaseLayout({
@@ -25,9 +25,5 @@ export default function BaseLayout({
         </div>
       </body>
     </html>
-    // <div>
-    //   <DashBoard />
-    //   <main>{children}</main>
-    // </div>
   );
 }

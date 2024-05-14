@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -9,12 +9,12 @@ export default function Home() {
 
       <div className="mb-32 grid text-center lg:mb-10 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left p-10">
         <Link
-          href={"/portfolio"}
+          href={'/portfolio'}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           rel="noopener noreferrer"
         >
           <h2 className="mb-3 text-2xl font-semibold">
-            Portfolio{" "}
+            Portfolio{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -25,7 +25,7 @@ export default function Home() {
         </Link>
         <Link
           href={
-            "https://www.linkedin.com/in/%EB%AF%BC%ED%98%84-%EA%B9%80-ba92012b3/"
+            'https://www.linkedin.com/in/%EB%AF%BC%ED%98%84-%EA%B9%80-ba92012b3/'
           }
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           rel="noopener noreferrer"
@@ -39,7 +39,7 @@ export default function Home() {
             height={25}
           /> */}
           <h2 className="mb-3 text-2xl font-semibold">
-            LinkedIn{" "}
+            LinkedIn{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -49,13 +49,13 @@ export default function Home() {
           </p>
         </Link>
         <Link
-          href={"https://github.com/m2nhyun"}
+          href={'https://github.com/m2nhyun'}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           rel="noopener noreferrer"
           target="_blank"
         >
           <h2 className="mb-3 text-2xl font-semibold">
-            Github{" "}
+            Github{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -66,7 +66,7 @@ export default function Home() {
         </Link>
 
         <Link
-          href={"/blog"}
+          href={'/blog'}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           rel="noopener noreferrer"
         >
@@ -78,7 +78,7 @@ export default function Home() {
             height={25}
           /> */}
           <h2 className="mb-3 text-2xl font-semibold">
-            Blog{" "}
+            Blog{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
