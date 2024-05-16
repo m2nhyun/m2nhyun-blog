@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 // import { Inter } from "next/font/google";
 import './globals.css';
-import DashBoard from './dashboard/page';
+import { Header } from '@/components';
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +18,9 @@ export default function BaseLayout({
   return (
     <html lang="en">
       <head></head>
-      <body>
-        <DashBoard />
-        <div className="flex justify-center">
-          <main className="w-500px">{children}</main>
-        </div>
+      <body className="ml-auto mr-auto max-w-4xl">
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   );
