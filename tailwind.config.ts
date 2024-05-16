@@ -11,10 +11,18 @@ const config = {
   prefix: "",
   theme: {
     container: {
-      center: true,
-      padding: "2rem",
+      // center: true,
+      padding: "0.5rem",
       screens: {
-        "2xl": "1400px",
+        'sm': '550px',
+
+        'md': '768px',
+
+        'lg': '1024px',
+
+        'xl': '1280px',
+
+        '2xl': '1440px',
       },
     },
     extend: {
