@@ -10,9 +10,6 @@ export function Header() {
             <div className="text-3xl">Minhyun</div>
           </Link>{' '}
           <div className="flex gap-2 text-lg">
-            <Link href={'/'}>Home</Link>
-            <Link href={'/aboutMe'}>About Me</Link>
-            <Link href={'/blog'}>Blog</Link>
             <div>다크모드 변경</div>
           </div>
         </div>

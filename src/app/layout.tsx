@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 // import { Inter } from "next/font/google";
 import './globals.css';
-import { Header } from '@/components';
+import { Header, Sidebar } from '@/components';
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +18,10 @@ export default function BaseLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className="ml-auto mr-auto max-w-4xl">
+      <body className="p-4">
         <Header />
-        <main>{children}</main>
+        <Sidebar />
+        <main className="ml-auto mr-auto max-w-xl pt-2 pl-10">{children}</main>
       </body>
     </html>
   );
