@@ -36,8 +36,8 @@ import { Header, Sidebar } from '@/components';
 import { ThemeProvider } from '@/components';
 
 export const metadata: Metadata = {
-    title: 'My Blog',
-    description: 'My personal blog built with Next.js',
+    title: 'Blog',
+    description: '김민현의 블로그',
 };
 
 export default function RootLayout({
@@ -53,8 +53,8 @@ export default function RootLayout({
                     <div className="flex flex-1 mt-14">
                         <Sidebar position="left" />
                         <main
-                            className="flex-1 p-4 ml-[360px] mr-[280px] border-t-[2px]
-                        border-slate-800 dark:border-slate-300"
+                            className="flex-1 p-4 mx-auto max-w-[640px] border-t-[2px]
+                        border-slate-500 dark:border-slate-300"
                         >
                             {children}
                         </main>
