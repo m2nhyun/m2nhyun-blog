@@ -3,28 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components';
-
-const categories = [
-    { name: 'Blog', path: '/blog' },
-    { name: 'Information', path: '/information' },
-    { name: 'Portfolio', path: '/portfolio' },
-];
-
-const socialLinks = [
-    { name: 'Github', url: 'https://github.com/m2nhyun' },
-    {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/%EB%AF%BC%ED%98%84-%EA%B9%80-ba92012b3/',
-    },
-    { name: 'Instagram', url: 'https://www.instagram.com/m2n.__.hyun/' },
-];
+import { categories, socialLinks } from '@/data';
 
 export function Sidebar({ position }: { position: 'left' | 'right' }) {
     const pathname = usePathname();
 
     const linkStyle =
         'block w-full py-2 px-4 rounded-md transition-colors duration-200 ease-in-out';
-    const activeLinkStyle = 'bg-slate-200 dark:bg-gray-700 font-medium';
+    const activeLinkStyle =
+        'bg-slate-300 dark:bg-gray-500 font-medium font-semibold';
     const inactiveLinkStyle =
         'bg-white dark:bg-gray-800 hover:bg-slate-100 dark:hover:bg-gray-700';
 
