@@ -2,5 +2,5 @@
 
 export function BlogContent() {
     // return <BlogPage />;
-    return <>Blog</>;
+    return <div>Blog</div>;
 }

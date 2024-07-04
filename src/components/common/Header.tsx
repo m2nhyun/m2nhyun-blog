@@ -34,6 +34,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { DarkModeToggle } from '../theme';
+import { Sidebar } from './Sidebar';
 
 export function Header() {
     const [opacity, setOpacity] = useState(0);
@@ -51,7 +52,8 @@ export function Header() {
     return (
         <header
             className="fixed top-0 left-[5%] right-[5%] z-10 
-        bg-white dark:bg-gray-800 text-black dark:text-white"
+        bg-white dark:bg-gray-800 text-black dark:text-white 
+        border-b-[2px] border-slate-200 dark:border-slate-600"
         >
             <nav
                 className="container px-4 py-2  justify-between 
@@ -60,7 +62,11 @@ export function Header() {
                 <Link href={'/'} className="text-xl font-semibold">
                     Minhyun
                 </Link>
-                <DarkModeToggle />
+                <div className="flex gap-5">
+                    <Sidebar />
+
+                    <DarkModeToggle />
+                </div>
             </nav>
         </header>
     );

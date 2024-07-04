@@ -32,7 +32,7 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header, Sidebar } from '@/components';
+import { Footer, Header, Sidebar } from '@/components';
 import { ThemeProvider } from '@/components';
 
 export const metadata: Metadata = {
@@ -51,16 +51,14 @@ export default function RootLayout({
                 <body className="flex flex-col min-h-screen bg-white dark:bg-gray-800 text-black dark:text-white">
                     <Header />
                     <div className="flex flex-1 mt-14">
-                        <Sidebar position="left" />
-                        <main
-                            className="flex-1 p-4 mx-auto max-w-[640px] border-t-[2px]
-                        border-slate-500 dark:border-slate-300"
-                        >
+                        <main className="flex-1 p-4 mx-auto max-w-[640px] ">
                             {children}
                         </main>
-                        <Sidebar position="right" />
                     </div>
                 </body>
+                <footer className="flex flex-col bg-white dark:bg-gray-800 text-black dark:text-white items-center">
+                    <Footer />
+                </footer>
             </ThemeProvider>
         </html>
     );
