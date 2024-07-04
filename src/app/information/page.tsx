@@ -1,7 +1,5 @@
+import { InformationContent } from '@/components';
+
 export default function Page() {
-  return (
-    <>
-      <div>인포메이션</div>
-    </>
-  );
+    return <InformationContent />;
 }

@@ -1,7 +1,5 @@
+import { BlogContent } from '@/components';
+
 export default function Blog() {
-  return (
-    <>
-      <div>블로그</div>
-    </>
-  );
+    return <BlogContent />;
 }
