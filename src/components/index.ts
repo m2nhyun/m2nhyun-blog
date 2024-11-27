@@ -4,5 +4,6 @@ export * from './guestbook';
 export * from './information';
 export * from './portfolio';
 export * from './resume';
+export * from './series';
 export * from './theme';
 export * from './ui';

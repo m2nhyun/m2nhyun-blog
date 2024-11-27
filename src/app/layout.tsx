@@ -1,38 +1,6 @@
-// import type { Metadata } from 'next';
-// // import { Inter } from "next/font/google";
-// import './globals.css';
-// import { Header, Sidebar } from '@/components';
-
-// // const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata: Metadata = {
-//   title: 'MinHyun_Blog',
-//   description: 'next app',
-// };
-
-// export default function BaseLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <head></head>
-//       <body className="w-full h-screeen bg-slate-50">
-//         <Header />
-//         <Sidebar />
-//         <main className="w-full h-full max-w-[640px] bg-white overflow-auto mx-auto pt-[80px]">
-//           {children}
-//         </main>
-//       </body>
-//     </html>
-//   );
-// }
-
-// app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
-import { Footer, Header, Sidebar } from '@/components';
+import { Footer, Header } from '@/components';
 import { ThemeProvider } from '@/components';
 
 export const metadata: Metadata = {
