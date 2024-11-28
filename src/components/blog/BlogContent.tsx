@@ -1,6 +1,12 @@
 // import { BlogPage } from '@/components';
 
+import { BlogPage } from './BlogPage';
+
 export function BlogContent() {
     // return <BlogPage />;
-    return <div>Blog</div>;
+    return (
+        <div>
+            <BlogPage />
+        </div>
+    );
 }

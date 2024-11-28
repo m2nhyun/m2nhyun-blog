@@ -23,10 +23,8 @@ export default function RootLayout({
                             {children}
                         </main>
                     </div>
-                </body>
-                <footer className="flex flex-col bg-white dark:bg-gray-800 text-black dark:text-white items-center">
                     <Footer />
-                </footer>
+                </body>
             </ThemeProvider>
         </html>
     );
