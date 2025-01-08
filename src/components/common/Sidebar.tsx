@@ -3,16 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
     Menubar,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
     MenubarTrigger,
 } from '@/components';
 import { categories } from '@/data';

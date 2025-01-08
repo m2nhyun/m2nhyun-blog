@@ -38,6 +38,7 @@ import { Sidebar } from './Sidebar';
 
 export function Header() {
     const [opacity, setOpacity] = useState(0);
+    console.log(opacity);
 
     useEffect(() => {
         const handleScroll = () => {
