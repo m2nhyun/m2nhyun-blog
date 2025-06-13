@@ -29,7 +29,9 @@ export const BlogList = () => {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center py-12">
-                <div className="text-gray-600 dark:text-gray-400">포스트를 불러오는 중...</div>
+                <div className="text-gray-600 dark:text-gray-400">
+                    포스트를 불러오는 중...
+                </div>
             </div>
         );
     }
@@ -37,8 +39,10 @@ export const BlogList = () => {
     if (error) {
         return (
             <div className="text-center py-12">
-                <div className="text-red-600 dark:text-red-400 mb-4">{error}</div>
-                <button 
+                <div className="text-red-600 dark:text-red-400 mb-4">
+                    {error}
+                </div>
+                <button
                     onClick={() => window.location.reload()}
                     className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
@@ -57,7 +61,7 @@ export const BlogList = () => {
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                     첫 번째 포스트를 작성해보세요!
                 </p>
-                <Link 
+                <Link
                     href="/admin"
                     className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
@@ -77,7 +81,7 @@ export const BlogList = () => {
                     총 {posts.length}개의 포스트
                 </p>
             </div>
-            
+
             <div className="space-y-6">
                 {posts.map((post) => (
                     <PostCard key={post.id} post={post} />
@@ -102,7 +106,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
     const getExcerpt = (content: string, maxLength: number = 150) => {
         if (post.excerpt) return post.excerpt;
-        
+
         // Markdown 문법 제거
         const plainText = content
             .replace(/#{1,6}\s+/g, '') // 헤딩
@@ -113,15 +117,17 @@ const PostCard = ({ post }: PostCardProps) => {
             .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // 이미지
             .replace(/\n+/g, ' ') // 줄바꿈
             .trim();
-            
-        return plainText.length > maxLength 
+
+        return plainText.length > maxLength
             ? plainText.substring(0, maxLength) + '...'
             : plainText;
     };
 
     return (
-        <article className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg 
-                         bg-white dark:bg-gray-800 hover:shadow-md transition-shadow">
+        <article
+            className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg 
+                         bg-white dark:bg-gray-800 hover:shadow-md transition-shadow"
+        >
             <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
@@ -131,13 +137,15 @@ const PostCard = ({ post }: PostCardProps) => {
                             </h2>
                         </Link>
                         {post.featured && (
-                            <span className="px-2 py-1 text-xs bg-yellow-100 dark:bg-yellow-900 
-                                           text-yellow-800 dark:text-yellow-200 rounded-full">
+                            <span
+                                className="px-2 py-1 text-xs bg-yellow-100 dark:bg-yellow-900 
+                                           text-yellow-800 dark:text-yellow-200 rounded-full"
+                            >
                                 Featured
                             </span>
                         )}
                     </div>
-                    
+
                     <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
                         <span>{formatDate(post.createdAt)}</span>
                         <span>작성자: {post.author}</span>
@@ -152,11 +160,11 @@ const PostCard = ({ post }: PostCardProps) => {
                     </div>
                 </div>
             </div>
-            
+
             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
                 {getExcerpt(post.content)}
             </p>
-            
+
             {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                     {post.tags.map((tag) => (
@@ -170,8 +178,8 @@ const PostCard = ({ post }: PostCardProps) => {
                     ))}
                 </div>
             )}
-            
-            <Link 
+
+            <Link
                 href={`/blog/${post.slug}`}
                 className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
             >
