@@ -1,5 +1,5 @@
-import { BlogContent } from '@/components';
+import { BlogList } from '@/features/blog-post';
 
-export default function Page() {
-    return <BlogContent />;
+export default function BlogPage() {
+    return <BlogList />;
 }

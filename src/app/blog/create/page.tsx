@@ -1,4 +1,4 @@
-import { CreatePost } from '@/components';
+import { CreatePost } from '@/features';
 
 export default function CreatePostPage() {
     return (

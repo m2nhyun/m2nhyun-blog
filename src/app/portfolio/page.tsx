@@ -1,5 +1,5 @@
-import { PortfolioContent } from '@/components';
+import { PortfolioContent } from '@/features/portfolio';
 
-export default function Page() {
+export default function PortfolioPage() {
     return <PortfolioContent />;
 }
