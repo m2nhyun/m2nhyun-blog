@@ -1,22 +1,20 @@
 // features/blog-post/services/postService.ts
-import { 
-    collection, 
-    doc, 
-    addDoc, 
-    updateDoc, 
-    deleteDoc, 
-    getDoc, 
-    getDocs, 
-    query, 
-    orderBy, 
-    where, 
-    Timestamp 
+import {
+    collection,
+    doc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    getDoc,
+    getDocs,
+    query,
+    orderBy,
+    where,
+    Timestamp,
 } from 'firebase/firestore';
-import { getFirestore } from 'firebase/firestore';
-import { auth } from '@/shared/lib/firebase';
+import { auth, db } from '@/shared/lib/firebase/config';
 import { Post, PostCreateData, PostUpdateData } from '@/entities/post';
 
-const db = getFirestore();
 const POSTS_COLLECTION = 'posts';
 
 // 포스트 생성
@@ -47,18 +45,24 @@ export const createPost = async (data: PostCreateData): Promise<string> => {
 };
 
 // 포스트 목록 조회
-export const getPosts = async (publishedOnly: boolean = true): Promise<Post[]> => {
+export const getPosts = async (
+    publishedOnly: boolean = true,
+): Promise<Post[]> => {
     try {
         const postsRef = collection(db, POSTS_COLLECTION);
         let q = query(postsRef, orderBy('createdAt', 'desc'));
-        
+
         if (publishedOnly) {
-            q = query(postsRef, where('published', '==', true), orderBy('createdAt', 'desc'));
+            q = query(
+                postsRef,
+                where('published', '==', true),
+                orderBy('createdAt', 'desc'),
+            );
         }
 
         const querySnapshot = await getDocs(q);
-        
-        return querySnapshot.docs.map(doc => ({
+
+        return querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
             createdAt: doc.data().createdAt?.toDate().toISOString(),
@@ -87,7 +91,7 @@ export const getPost = async (id: string): Promise<Post | null> => {
                 publishedAt: data.publishedAt?.toDate().toISOString(),
             } as Post;
         }
-        
+
         return null;
     } catch (error) {
         console.error('Error getting post:', error);
@@ -99,16 +103,20 @@ export const getPost = async (id: string): Promise<Post | null> => {
 export const getPostBySlug = async (slug: string): Promise<Post | null> => {
     try {
         const postsRef = collection(db, POSTS_COLLECTION);
-        const q = query(postsRef, where('slug', '==', slug), where('published', '==', true));
+        const q = query(
+            postsRef,
+            where('slug', '==', slug),
+            where('published', '==', true),
+        );
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) return null;
 
-        const doc = querySnapshot.docs[0];
-        const data = doc.data();
-        
+        const docData = querySnapshot.docs[0];
+        const data = docData.data();
+
         return {
-            id: doc.id,
+            id: docData.id,
             ...data,
             createdAt: data.createdAt?.toDate().toISOString(),
             updatedAt: data.updatedAt?.toDate().toISOString(),
@@ -128,7 +136,7 @@ export const updatePost = async (data: PostUpdateData): Promise<void> => {
 
         const { id, ...updateData } = data;
         const docRef = doc(db, POSTS_COLLECTION, id);
-        
+
         await updateDoc(docRef, {
             ...updateData,
             updatedAt: Timestamp.now(),
@@ -159,11 +167,11 @@ export const incrementViews = async (id: string): Promise<void> => {
     try {
         const docRef = doc(db, POSTS_COLLECTION, id);
         const docSnap = await getDoc(docRef);
-        
+
         if (docSnap.exists()) {
             const currentViews = docSnap.data().views || 0;
             await updateDoc(docRef, {
-                views: currentViews + 1
+                views: currentViews + 1,
             });
         }
     } catch (error) {

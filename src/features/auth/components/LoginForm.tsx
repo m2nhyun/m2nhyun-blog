@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { loginWithEmail } from '../services/authService';
 
 const loginFormSchema = z.object({
     email: z.string().email('올바른 이메일 형식이 아닙니다'),
@@ -20,6 +21,7 @@ interface LoginFormProps {
 export const LoginForm = ({ onComplete }: LoginFormProps) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginFormSchema),
@@ -31,17 +33,13 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
 
     const onSubmit = async (data: LoginFormData) => {
         setIsSubmitting(true);
+        setError(null);
 
         try {
-            // TODO: Firebase Auth 로그인 로직 구현
-            console.log('Login data:', data);
-
+            await loginWithEmail(data.email, data.password);
             onComplete?.();
-
-            alert('로그인이 완료되었습니다!');
         } catch (error) {
-            console.error('Error during login:', error);
-            alert('로그인 중 오류가 발생했습니다.');
+            console.log(error);
         } finally {
             setIsSubmitting(false);
         }
@@ -57,6 +55,14 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
                     블로그 관리를 위해 로그인해주세요
                 </p>
             </div>
+
+            {error && (
+                <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                    <p className="text-red-600 dark:text-red-400 text-sm">
+                        {error}
+                    </p>
+                </div>
+            )}
 
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -123,6 +129,14 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
                 >
                     {isSubmitting ? '로그인 중...' : '로그인'}
                 </button>
+
+                <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                    <p>
+                        💡 Firebase 인증을 사용합니다
+                        <br />
+                        관리자 계정만 로그인 가능합니다
+                    </p>
+                </div>
             </form>
         </div>
     );
