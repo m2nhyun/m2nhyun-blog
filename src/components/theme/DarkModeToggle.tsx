@@ -3,7 +3,6 @@
 
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
-import { Switch } from '@/components';
 
 export function DarkModeToggle() {
     const { isDarkMode, toggleDarkMode } = useTheme();

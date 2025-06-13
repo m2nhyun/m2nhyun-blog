@@ -1,5 +1,5 @@
-import { GuestBookContent } from '@/components';
+import { GuestbookContent } from '@/features/guestbook';
 
-export default function Page() {
-    return <GuestBookContent />;
+export default function GuestbookPage() {
+    return <GuestbookContent />;
 }
