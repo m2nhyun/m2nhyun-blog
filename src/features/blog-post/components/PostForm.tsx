@@ -9,6 +9,7 @@ import { Post } from '@/entities/post';
 
 const postFormSchema = z.object({
     title: z.string().min(1, '제목을 입력해주세요'),
+    slug: z.string().min(1, 'URL 경로를 입력해주세요'),
     content: z.string().min(10, '내용을 10자 이상 입력해주세요'),
     excerpt: z.string().optional(),
     tags: z.string().optional(),
@@ -20,7 +21,7 @@ const postFormSchema = z.object({
 type PostFormData = z.infer<typeof postFormSchema>;
 
 interface PostFormProps {
-    post?: Post; // 수정 모드일 때 사용
+    post?: Post;
     onComplete?: () => void;
 }
 
@@ -32,6 +33,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
         resolver: zodResolver(postFormSchema),
         defaultValues: {
             title: post?.title || '',
+            slug: post?.slug || '',
             content: post?.content || '',
             excerpt: post?.excerpt || '',
             tags: post?.tags?.join(', ') || '',
@@ -41,15 +43,23 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
         },
     });
 
+    // slug 유효성 검사 함수
+    const validateSlug = (slug: string): boolean => {
+        return /^[a-z0-9-]+$/.test(slug);
+    };
+
     const onSubmit = async (data: PostFormData) => {
         setIsSubmitting(true);
 
         try {
-            const slug = data.title
-                .toLowerCase()
-                .replace(/[^a-z0-9가-힣\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .trim();
+            // slug 유효성 검사
+            if (!validateSlug(data.slug)) {
+                alert(
+                    'URL 경로는 영문 소문자, 숫자, 하이픈(-)만 사용 가능합니다.',
+                );
+                setIsSubmitting(false);
+                return;
+            }
 
             const tags = data.tags
                 ? data.tags
@@ -61,7 +71,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
             const postData = {
                 title: data.title,
                 content: data.content,
-                slug: isEditMode ? post.slug : slug,
+                slug: data.slug,
                 excerpt: data.excerpt,
                 tags,
                 category: data.category,
@@ -76,6 +86,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                 await createPost(postData);
                 form.reset({
                     title: '',
+                    slug: '',
                     content: '',
                     excerpt: '',
                     tags: '',
@@ -121,6 +132,26 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                         {form.formState.errors.title.message}
                     </span>
                 )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    URL 경로 <span className="text-red-500">*</span>
+                </label>
+                <input
+                    {...form.register('slug')}
+                    type="text"
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
+                             bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                             focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                    placeholder="my-first-blog-post"
+                />
+                {form.formState.errors.slug && (
+                    <span className="text-sm text-red-500">
+                        {form.formState.errors.slug.message}
+                    </span>
+                )}
+                <span className="text-xs text-gray-500">URL에 사용됩니다:</span>
             </div>
 
             <div className="flex flex-col gap-2">
