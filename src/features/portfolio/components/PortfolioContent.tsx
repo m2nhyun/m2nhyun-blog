@@ -110,7 +110,7 @@ export const PortfolioContent = () => {
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
                                          ${
                                              selectedCategory === category.value
-                                                 ? 'bg-blue-600 text-white'
+                                                 ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
                                                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                                          }`}
                             >
@@ -167,8 +167,8 @@ const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
                     </h3>
                     {project.featured && (
                         <span
-                            className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900
-                                       text-blue-800 dark:text-blue-200 rounded-full"
+                            className="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700
+                                       text-gray-700 dark:text-gray-300 rounded-full"
                         >
                             Featured
                         </span>
@@ -211,7 +211,8 @@ const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-3 py-2 text-sm
-                                     bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                                     bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900
+                                     rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                         >
                             <ExternalLink className="w-4 h-4" />
                             라이브

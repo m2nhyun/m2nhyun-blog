@@ -64,7 +64,7 @@ src/features/blog-post/components/PostForm.tsx
 ```
 src/app/blog/page.tsx
 src/app/blog/[slug]/page.tsx
-src/app/blog/create/page.tsx
+src/app/admin/posts/new/page.tsx
 ```
 
 ---

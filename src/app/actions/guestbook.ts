@@ -37,20 +37,13 @@ export async function getGuestbookEntries(
 ): Promise<GuestbookEntry[]> {
     const db = getAdminDb();
 
-    let query = db
+    // 복합 인덱스 없이 동작하도록 createdAt으로만 정렬 후 클라이언트에서 필터링
+    const snapshot = await db
         .collection(GUESTBOOK_COLLECTION)
-        .orderBy('createdAt', 'desc');
+        .orderBy('createdAt', 'desc')
+        .get();
 
-    if (approvedOnly) {
-        query = db
-            .collection(GUESTBOOK_COLLECTION)
-            .where('approved', '==', true)
-            .orderBy('createdAt', 'desc');
-    }
-
-    const snapshot = await query.get();
-
-    return snapshot.docs.map((doc) => {
+    const entries = snapshot.docs.map((doc) => {
         const data = doc.data();
         return {
             id: doc.id,
@@ -59,6 +52,13 @@ export async function getGuestbookEntries(
             updatedAt: data.updatedAt?.toDate().toISOString() || '',
         } as GuestbookEntry;
     });
+
+    // approvedOnly인 경우 클라이언트에서 필터링
+    if (approvedOnly) {
+        return entries.filter((entry) => entry.approved);
+    }
+
+    return entries;
 }
 
 // 방명록 항목 삭제
