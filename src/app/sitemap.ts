@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
-import { getPosts } from '@/features/blog-post/services/postService';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://m2nhyun-blog.vercel.app';
 
-    // 정적 페이지
-    const staticPages: MetadataRoute.Sitemap = [
+    // 정적 페이지만 포함 (Firebase는 클라이언트에서만 사용)
+    return [
         {
             url: baseUrl,
             lastModified: new Date(),
@@ -30,20 +29,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'weekly',
             priority: 0.7,
         },
+        {
+            url: `${baseUrl}/aboutMe`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
     ];
-
-    // 동적 페이지 (블로그 포스트)
-    try {
-        const posts = await getPosts(true);
-        const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
-            url: `${baseUrl}/blog/${post.slug}`,
-            lastModified: new Date(post.updatedAt || post.createdAt),
-            changeFrequency: 'weekly' as const,
-            priority: 0.6,
-        }));
-
-        return [...staticPages, ...postPages];
-    } catch {
-        return staticPages;
-    }
 }
