@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getPostBySlug, incrementViews } from '../services/postService';
+import { getPostBySlug, incrementViews } from '@/app/actions/post';
 import { Post } from '@/entities/post';
 
 interface BlogDetailProps {
@@ -76,7 +76,6 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
         });
     };
 
-    // 간단한 Markdown 렌더링 (나중에 react-markdown으로 개선 가능)
     const renderMarkdown = (content: string) => {
         return content
             .replace(
@@ -110,7 +109,6 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
 
     return (
         <article className="max-w-4xl mx-auto">
-            {/* 뒤로가기 버튼 */}
             <button
                 onClick={() => router.push('/blog')}
                 className="mb-6 text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
@@ -118,7 +116,6 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                 ← 블로그 목록으로
             </button>
 
-            {/* 포스트 헤더 */}
             <header className="mb-8">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                     {post.title}
@@ -150,7 +147,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                         {post.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 
+                                className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900
                                          text-blue-800 dark:text-blue-200 rounded-full"
                             >
                                 #{tag}
@@ -160,7 +157,6 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                 )}
             </header>
 
-            {/* 포스트 내용 */}
             <div
                 className="prose prose-lg dark:prose-invert max-w-none
                          prose-headings:text-gray-900 dark:prose-headings:text-gray-100
@@ -177,14 +173,12 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                 />
             </div>
 
-            {/* 포스트 푸터 */}
             <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                     <div className="text-sm text-gray-500 dark:text-gray-400">
                         마지막 수정: {formatDate(post.updatedAt)}
                     </div>
 
-                    {/* 공유 버튼들 (나중에 추가 가능) */}
                     <div className="flex gap-2">
                         <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                             공유
