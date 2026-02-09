@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { LoginForm } from './LoginForm';
 import { logout, onAuthStateChange, AuthUser } from '../services/authService';
+import { getDashboardStats, DashboardStats } from '@/app/actions/stats';
 
 export const AdminContent = () => {
     const [user, setUser] = useState<AuthUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [stats, setStats] = useState<DashboardStats | null>(null);
+    const [statsLoading, setStatsLoading] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChange((authUser) => {
@@ -17,6 +20,15 @@ export const AdminContent = () => {
 
         return unsubscribe;
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            setStatsLoading(true);
+            getDashboardStats()
+                .then(setStats)
+                .finally(() => setStatsLoading(false));
+        }
+    }, [user]);
 
     const handleLogout = async () => {
         try {
@@ -139,49 +151,60 @@ export const AdminContent = () => {
 
             {/* 통계 섹션 */}
             <div
-                className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg 
+                className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg
                           bg-white dark:bg-gray-800"
             >
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                     사이트 통계
                 </h3>
-                <div className="grid gap-4 md:grid-cols-4">
-                    <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                            ?
+                {statsLoading ? (
+                    <div className="text-center py-4 text-gray-500 dark:text-gray-400">
+                        통계 로딩 중...
+                    </div>
+                ) : (
+                    <div className="grid gap-4 md:grid-cols-4">
+                        <div className="text-center">
+                            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                                {stats?.publishedPosts || 0}
+                                <span className="text-sm font-normal text-gray-500">
+                                    /{stats?.totalPosts || 0}
+                                </span>
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                                발행/전체 포스트
+                            </div>
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                            총 포스트
+                        <div className="text-center">
+                            <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                                {stats?.totalGuestbook || 0}
+                                {stats && stats.pendingGuestbook > 0 && (
+                                    <span className="text-sm font-normal text-yellow-500 ml-1">
+                                        ({stats.pendingGuestbook} 대기)
+                                    </span>
+                                )}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                                방명록 메시지
+                            </div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                                {stats?.totalPortfolio || 0}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                                포트폴리오 프로젝트
+                            </div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                                {stats?.totalViews?.toLocaleString() || 0}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                                총 조회수
+                            </div>
                         </div>
                     </div>
-                    <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                            ?
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                            방명록 메시지
-                        </div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                            ?
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                            포트폴리오 프로젝트
-                        </div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                            ?
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                            월간 조회수
-                        </div>
-                    </div>
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
-                    💡 실제 통계는 Firebase에서 데이터를 가져와 표시됩니다
-                </p>
+                )}
             </div>
         </div>
     );

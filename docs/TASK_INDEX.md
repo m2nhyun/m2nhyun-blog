@@ -22,7 +22,7 @@
 |------|------|
 | **설명** | 포스트/방명록/포트폴리오 관리 UI 구현 |
 | **난이도** | 중간 |
-| **상태** | ⬜ 미완료 |
+| **상태** | ✅ 완료 |
 
 **읽어야 할 파일:**
 ```
@@ -66,7 +66,7 @@ src/app/layout.tsx
 docs/QUICK_REF.md
 src/features/blog-post/components/PostForm.tsx
 src/entities/post/types.ts
-src/app/blog/create/page.tsx
+src/app/admin/posts/new/page.tsx
 ```
 
 ---
@@ -266,7 +266,7 @@ src/app/actions/post.ts
 
 | 번호 | 작업 | 완료일 | PR |
 |------|------|--------|-----|
-| - | - | - | - |
+| TASK-001 | 관리자 대시보드 CRUD 완성 | 2026-02-09 | - |
 
 ---
 
