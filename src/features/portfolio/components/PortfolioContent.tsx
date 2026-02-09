@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { PortfolioItem } from '@/entities/portfolio-item';
-import { getPortfolioItems } from '../services/portfolioService';
+import { getPortfolioItems } from '@/app/actions/portfolio';
 
 export const PortfolioContent = () => {
     const [projects, setProjects] = useState<PortfolioItem[]>([]);
