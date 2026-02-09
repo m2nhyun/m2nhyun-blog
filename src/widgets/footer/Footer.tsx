@@ -32,7 +32,7 @@ export function Footer() {
                     </Link>
                 </div>
                 <div className="text-xs py-2 text-center">
-                    Copyright © 2024 MinhyunKim
+                    Copyright © {new Date().getFullYear()} MinhyunKim
                 </div>
             </div>
         </footer>

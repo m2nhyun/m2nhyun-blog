@@ -1,24 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { DarkModeToggle } from '@/features/theme';
 import { Sidebar } from './Sidebar';
 
 export function Header() {
-    const [opacity, setOpacity] = useState(0);
-    console.log(opacity);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const newOpacity = Math.min(window.scrollY / 100, 0.8);
-            setOpacity(newOpacity);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
         <header
             className="fixed top-0 left-[5%] right-[5%] z-10 

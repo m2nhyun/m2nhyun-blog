@@ -62,7 +62,7 @@ export default function HomePage() {
             </section>
 
             {/* Recent Posts Preview */}
-            <section>
+            {/* <section>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
                     최근 포스트
                 </h2>
@@ -77,7 +77,7 @@ export default function HomePage() {
                         블로그로 이동 →
                     </Link>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 }

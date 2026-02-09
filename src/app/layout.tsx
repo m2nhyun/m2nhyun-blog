@@ -70,12 +70,28 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ko" suppressHydrationWarning>
+            <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                try {
+                                    var isDark = localStorage.getItem('darkMode') === 'true';
+                                    if (isDark) {
+                                        document.documentElement.classList.add('dark');
+                                    }
+                                } catch (e) {}
+                            })();
+                        `,
+                    }}
+                />
+            </head>
             <body className="flex flex-col min-h-screen">
                 <ThemeProvider>
                     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-800 text-black dark:text-white">
                         <Header />
                         <div className="flex flex-1 mt-14">
-                            <main className="flex-1 p-4 mx-auto max-w-[640px]">
+                            <main className="flex-1 p-4 w-full">
                                 {children}
                             </main>
                         </div>
