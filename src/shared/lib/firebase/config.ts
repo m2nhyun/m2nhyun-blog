@@ -13,18 +13,42 @@ const firebaseConfig = {
 };
 
 let app: FirebaseApp | undefined;
-let auth: Auth | undefined;
-let db: Firestore | undefined;
+let authInstance: Auth | undefined;
+let dbInstance: Firestore | undefined;
 
-// 클라이언트에서만 Firebase 초기화
-if (typeof window !== 'undefined' && firebaseConfig.apiKey) {
-    if (!getApps().length) {
-        app = initializeApp(firebaseConfig);
-    } else {
-        app = getApps()[0];
+const getFirebaseApp = (): FirebaseApp => {
+    if (typeof window === 'undefined') {
+        throw new Error('Firebase는 클라이언트에서만 사용 가능합니다');
     }
-    auth = getAuth(app);
-    db = getFirestore(app);
-}
 
-export { auth, db };
+    if (!app) {
+        if (!getApps().length) {
+            app = initializeApp(firebaseConfig);
+        } else {
+            app = getApps()[0];
+        }
+    }
+    return app;
+};
+
+export const auth: Auth = new Proxy({} as Auth, {
+    get(_, prop) {
+        if (!authInstance) {
+            authInstance = getAuth(getFirebaseApp());
+        }
+        return (authInstance as unknown as Record<string | symbol, unknown>)[
+            prop
+        ];
+    },
+});
+
+export const db: Firestore = new Proxy({} as Firestore, {
+    get(_, prop) {
+        if (!dbInstance) {
+            dbInstance = getFirestore(getFirebaseApp());
+        }
+        return (dbInstance as unknown as Record<string | symbol, unknown>)[
+            prop
+        ];
+    },
+});
