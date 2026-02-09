@@ -76,7 +76,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="이름을 입력하세요"
                 />
                 {form.formState.errors.name && (
@@ -95,7 +95,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                     type="email"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="이메일 주소 (선택사항)"
                 />
                 {form.formState.errors.email && (
@@ -114,7 +114,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                     rows={6}
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 resize-y"
                     placeholder="방명록에 남길 메시지를 작성하세요"
                 />
                 {form.formState.errors.message && (
@@ -130,9 +130,10 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
             <button
                 type="submit"
                 disabled={isSubmitting || !form.formState.isValid}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400
-                         text-white font-medium rounded-md transition-colors duration-200
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-3 bg-gray-900 dark:bg-gray-100 hover:bg-gray-800 dark:hover:bg-gray-200
+                         text-white dark:text-gray-900 font-medium rounded-md transition-colors duration-200
+                         disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed
+                         focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
             >
                 {isSubmitting ? '등록 중...' : '방명록 등록'}
             </button>

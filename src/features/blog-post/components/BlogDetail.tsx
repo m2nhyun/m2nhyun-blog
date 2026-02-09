@@ -58,7 +58,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                 </h1>
                 <button
                     onClick={() => router.push('/blog')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="text-gray-700 dark:text-gray-300 hover:underline"
                 >
                     ← 블로그 목록으로 돌아가기
                 </button>
@@ -101,7 +101,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
             )
             .replace(
                 /\[([^\]]+)\]\(([^)]+)\)/g,
-                '<a href="$2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>',
+                '<a href="$2" class="text-gray-700 dark:text-gray-300 hover:underline" target="_blank" rel="noopener noreferrer">$1</a>',
             )
             .replace(/\n\n/g, '</p><p class="mb-4">')
             .replace(/\n/g, '<br/>');
@@ -111,7 +111,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
         <article className="max-w-4xl mx-auto">
             <button
                 onClick={() => router.push('/blog')}
-                className="mb-6 text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                className="mb-6 text-gray-700 dark:text-gray-300 hover:underline flex items-center gap-1"
             >
                 ← 블로그 목록으로
             </button>
@@ -147,8 +147,8 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                         {post.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900
-                                         text-blue-800 dark:text-blue-200 rounded-full"
+                                className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700
+                                         text-gray-700 dark:text-gray-300 rounded-full"
                             >
                                 #{tag}
                             </span>
@@ -163,7 +163,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
                          prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:mb-4
                          prose-code:bg-gray-100 dark:prose-code:bg-gray-800
                          prose-pre:bg-gray-900 dark:prose-pre:bg-gray-800
-                         prose-a:text-blue-600 dark:prose-a:text-blue-400"
+                         prose-a:text-gray-700 dark:prose-a:text-gray-300 prose-a:underline"
             >
                 <p
                     className="mb-4"

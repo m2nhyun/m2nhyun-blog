@@ -71,7 +71,7 @@ export const GuestbookList = () => {
                     <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
                             <div
-                                className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600
+                                className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800
                                           rounded-full flex items-center justify-center text-white font-bold"
                             >
                                 {entry.name.charAt(0)}
