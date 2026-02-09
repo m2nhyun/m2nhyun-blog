@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getPosts } from '../services/postService';
+import { getPosts } from '@/app/actions/post';
 import { Post } from '@/entities/post';
 
 export const BlogList = () => {
@@ -13,7 +13,7 @@ export const BlogList = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const fetchedPosts = await getPosts(true); // 게시된 포스트만
+                const fetchedPosts = await getPosts(true);
                 setPosts(fetchedPosts);
             } catch (error) {
                 console.error('Failed to fetch posts:', error);
@@ -107,15 +107,14 @@ const PostCard = ({ post }: PostCardProps) => {
     const getExcerpt = (content: string, maxLength: number = 150) => {
         if (post.excerpt) return post.excerpt;
 
-        // Markdown 문법 제거
         const plainText = content
-            .replace(/#{1,6}\s+/g, '') // 헤딩
-            .replace(/\*\*(.*?)\*\*/g, '$1') // 볼드
-            .replace(/\*(.*?)\*/g, '$1') // 이탤릭
-            .replace(/`(.*?)`/g, '$1') // 인라인 코드
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // 링크
-            .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // 이미지
-            .replace(/\n+/g, ' ') // 줄바꿈
+            .replace(/#{1,6}\s+/g, '')
+            .replace(/\*\*(.*?)\*\*/g, '$1')
+            .replace(/\*(.*?)\*/g, '$1')
+            .replace(/`(.*?)`/g, '$1')
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+            .replace(/!\[([^\]]*)\]\([^)]+\)/g, '')
+            .replace(/\n+/g, ' ')
             .trim();
 
         return plainText.length > maxLength
@@ -125,7 +124,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
     return (
         <article
-            className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg 
+            className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg
                          bg-white dark:bg-gray-800 hover:shadow-md transition-shadow"
         >
             <div className="flex items-start justify-between mb-3">
@@ -138,7 +137,7 @@ const PostCard = ({ post }: PostCardProps) => {
                         </Link>
                         {post.featured && (
                             <span
-                                className="px-2 py-1 text-xs bg-yellow-100 dark:bg-yellow-900 
+                                className="px-2 py-1 text-xs bg-yellow-100 dark:bg-yellow-900
                                            text-yellow-800 dark:text-yellow-200 rounded-full"
                             >
                                 Featured
@@ -170,7 +169,7 @@ const PostCard = ({ post }: PostCardProps) => {
                     {post.tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 
+                            className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900
                                      text-blue-800 dark:text-blue-200 rounded-full"
                         >
                             #{tag}

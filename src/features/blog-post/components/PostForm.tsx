@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
-import { createPost, updatePost } from '../services/postService';
+import { createPost, updatePost } from '@/app/actions/post';
 import { Post } from '@/entities/post';
 
 const postFormSchema = z.object({
