@@ -1,178 +1,147 @@
-# Minhyun Blog - FSD 아키텍처 마이그레이션 완료 🎉
+# Minhyun Blog
 
-## 📂 새로운 FSD 구조
+Next.js + Firebase 기반 개인 블로그
+
+## 기술 스택
+
+| 항목 | 기술 |
+|------|------|
+| **프레임워크** | Next.js 14 (App Router) |
+| **아키텍처** | Feature-Sliced Design (FSD) |
+| **데이터 레이어** | Next.js Server Actions |
+| **백엔드** | Firebase Admin SDK |
+| **인증** | Firebase Auth (Client SDK) |
+| **스타일링** | Tailwind CSS |
+| **언어** | TypeScript |
+| **폼 관리** | React Hook Form + Zod |
+
+## 프로젝트 구조
 
 ```
 src/
-├── app/                 # 앱 초기화, 라우팅, 전역 설정
-├── pages/               # 페이지 컴포넌트들 (향후 구현)
-├── widgets/             # 독립적인 UI 블록
-│   ├── header/          ✅ Header, Sidebar
-│   └── footer/          ✅ Footer
-├── features/            # 사용자 기능별 조직화
-│   ├── theme/           ✅ ThemeProvider, DarkModeToggle
-│   ├── blog-post/       ✅ PostForm, BlogList, BlogDetail, CreatePost
-│   ├── guestbook/       ✅ GuestbookForm, GuestbookList, GuestbookContent
-│   ├── portfolio/       ✅ PortfolioContent
-│   └── auth/            ✅ LoginForm, AdminContent
-├── entities/            # 비즈니스 엔티티
-│   ├── post/            ✅ Post 타입 정의
-│   ├── user/            ✅ User 타입 정의
-│   ├── guestbook-entry/ ✅ GuestbookEntry 타입 정의
-│   └── portfolio-item/  ✅ PortfolioItem 타입 정의
-└── shared/              # 공통 재사용 코드
-    ├── ui/              ✅ Card, Switch, Menubar
-    ├── lib/             ✅ Firebase 설정
-    ├── utils/           ✅ cn 함수
-    ├── constants/       ✅ categories, socialLinks
-    ├── types/           ✅ 공통 타입
-    └── hooks/           ✅ 공통 훅
+├── app/
+│   ├── actions/         # Server Actions (데이터 CRUD)
+│   │   ├── post.ts
+│   │   ├── guestbook.ts
+│   │   └── portfolio.ts
+│   ├── blog/            # 블로그 페이지
+│   ├── guestbook/       # 방명록 페이지
+│   ├── portfolio/       # 포트폴리오 페이지
+│   └── admin/           # 관리자 페이지
+├── widgets/             # 복합 UI 블록
+│   ├── header/          # Header, Sidebar
+│   └── footer/          # Footer
+├── features/            # 기능별 UI 컴포넌트
+│   ├── blog-post/       # BlogList, BlogDetail, PostForm
+│   ├── guestbook/       # GuestbookForm, GuestbookList
+│   ├── portfolio/       # PortfolioContent
+│   ├── auth/            # LoginForm, AdminContent
+│   └── theme/           # ThemeProvider, DarkModeToggle
+├── entities/            # 타입 정의
+│   ├── post/
+│   ├── guestbook-entry/
+│   ├── portfolio-item/
+│   └── user/
+└── shared/              # 공통 코드
+    ├── lib/firebase/    # Firebase Admin & Client SDK
+    ├── ui/              # 공통 UI 컴포넌트
+    ├── utils/           # 유틸리티 (cn 등)
+    └── constants/       # 상수
 ```
 
-## 🔧 추가 설치 필요 패키지
+## 아키텍처
 
-FSD 마이그레이션과 VIVISA 패턴 적용을 위해 다음 패키지들을 설치해주세요:
+### Server Actions 기반 데이터 레이어
+
+```
+[클라이언트 컴포넌트] → [Server Action] → [Firebase Admin SDK] → [Firestore]
+```
+
+- **보안**: Firebase Admin SDK가 서버에서만 실행
+- **번들 최적화**: Firestore 클라이언트 코드가 번들에 포함되지 않음
+- **캐시 관리**: `revalidatePath`로 정밀한 캐시 무효화
+
+## 시작하기
+
+### 1. 의존성 설치
 
 ```bash
-# React Hook Form + Zod (폼 관리)
-npm install react-hook-form @hookform/resolvers/zod zod
-
-# 추가 UI 아이콘 (이미 lucide-react 있음)
-# npm install lucide-react (이미 설치됨)
+npm install
 ```
 
-## ⭐ 적용된 VIVISA 패턴들
+### 2. 환경 변수 설정
 
-### 1. **Form 관리 패턴**
-- React Hook Form + Zod를 활용한 타입 안전한 폼
-- 유효성 검사 및 에러 처리
-- 재사용 가능한 폼 컴포넌트
+`.env.local` 파일 생성:
 
-### 2. **Features 폴더 구조**
-- `components/` - 해당 feature 전용 컴포넌트
-- `hooks/` - feature 전용 훅  
-- `services/` - API 호출 로직 (향후 구현)
-- `utils/` - feature 전용 유틸
+```env
+# 클라이언트 (브라우저 노출)
+NEXT_PUBLIC_FIREBASE_API_KEY=...
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+NEXT_PUBLIC_FIREBASE_APP_ID=...
+NEXT_PUBLIC_ADMIN_UID=...
 
-### 3. **TypeScript 타입 안정성**
-- 엄격한 타입 정의
-- Props 인터페이스 명확화
-- any 사용 금지
+# 서버 전용 (노출 안됨)
+FIREBASE_PROJECT_ID=...
+FIREBASE_CLIENT_EMAIL=...
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+```
 
-### 4. **컴포넌트 설계 원칙**
-- 단일 책임 원칙 준수
-- 재사용 가능한 UI 컴포넌트
-- Props 기반 컴포넌트 조합
+### 3. 개발 서버 실행
 
-## 🎯 완료된 Features
+```bash
+npm run dev
+```
 
-### ✅ **Theme Feature**
-- 다크/라이트 모드 토글
-- 테마 상태 관리
-- localStorage 연동
+http://localhost:3000 에서 확인
 
-### ✅ **Blog Post Feature**
-- PostForm (VIVISA 패턴 적용)
-- BlogList (포스트 목록)
-- BlogDetail (포스트 상세)
-- CreatePost (포스트 작성)
+## 스크립트
 
-### ✅ **Guestbook Feature**  
-- GuestbookForm (VIVISA 패턴 적용)
-- GuestbookList (방명록 목록)
-- GuestbookContent (전체 조합)
+| 명령어 | 설명 |
+|--------|------|
+| `npm run dev` | 개발 서버 |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run start` | 프로덕션 서버 |
+| `npm run lint` | ESLint 검사 |
 
-### ✅ **Portfolio Feature**
-- PortfolioContent (프로젝트 목록)
-- 카테고리 필터링
-- Featured 프로젝트 섹션
+## 문서
 
-### ✅ **Auth Feature**
-- LoginForm (VIVISA 패턴 적용)
-- AdminContent (관리자 대시보드)
-- Firebase Auth 연동 준비
+| 문서 | 설명 |
+|------|------|
+| [TASK_INDEX.md](docs/TASK_INDEX.md) | 전체 태스크 목록 & 작업 시작 가이드 |
+| [QUICK_REF.md](docs/QUICK_REF.md) | 빠른 참조 (토큰 최적화용) |
+| [CLAUDE_GUIDE.md](docs/CLAUDE_GUIDE.md) | Claude 작업 가이드 |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | FSD 아키텍처 상세 |
+| [COMPONENTS.md](docs/COMPONENTS.md) | 컴포넌트 패턴 |
+| [SERVICES.md](docs/SERVICES.md) | Server Actions 패턴 |
+| [DEVELOPMENT.md](docs/DEVELOPMENT.md) | 개발 환경 설정 |
 
-## 🔄 Import 경로 변경
+## 주요 기능
 
-### 기존 → 새로운 FSD 경로
+- **블로그**: 포스트 작성/수정/삭제, 카테고리/태그
+- **방명록**: 메시지 작성, 관리자 승인
+- **포트폴리오**: 프로젝트 소개, 기술 스택
+- **다크모드**: 시스템 설정 연동
+- **관리자**: Firebase Auth 기반 인증
+
+## Import 규칙
 
 ```typescript
-// 기존
-import { Header, Footer } from '@/components';
-import { ThemeProvider } from '@/components';
-
-// 새로운 FSD 경로
-import { Header } from '@/widgets/header';
-import { Footer } from '@/widgets/footer';  
-import { ThemeProvider } from '@/features/theme';
-```
-
-### 호환성 레이어
-
-기존 `@/components` import는 당분간 작동하지만, 점진적으로 새로운 FSD 경로로 변경 권장:
-
-```typescript
-// 현재 호환성 지원 (임시)
-import { PostForm } from '@/components'; // ✅ 작동
-
-// 권장하는 새로운 방식  
-import { PostForm } from '@/features/blog-post'; // 🎯 권장
-```
-
-## 🚀 다음 단계
-
-1. **필수 패키지 설치**
-   ```bash
-   npm install react-hook-form @hookform/resolvers/zod zod
-   ```
-
-2. **개발 서버 실행**
-   ```bash
-   npm run dev
-   ```
-
-3. **기능 테스트**
-   - ✅ 헤더/푸터 정상 표시
-   - ✅ 다크모드 토글 작동
-   - ✅ 네비게이션 메뉴 작동
-
-4. **향후 개발 계획**
-   - Services 레이어 구현 (Firebase CRUD)
-   - Pages 레이어 구성
-   - 기존 app 폴더 페이지들 정리
-   - API 통합 및 실제 데이터 연동
-
-## 💡 개발 가이드
-
-### 새로운 Feature 추가 시
-
-```
-src/features/새로운기능/
-├── components/          # UI 컴포넌트
-├── hooks/              # 커스텀 훅
-├── services/           # API 로직
-├── utils/              # 유틸리티
-└── index.ts            # exports
-```
-
-### Import 규칙
-
-```typescript
-// 1. 외부 라이브러리
+// 1. React/Next.js
 import { useState } from 'react';
-import { z } from 'zod';
 
-// 2. Shared layer
-import { Button } from '@/shared/ui';
-import { cn } from '@/shared/utils';
+// 2. Server Actions
+import { getPosts, createPost } from '@/app/actions/post';
 
 // 3. Entities
 import { Post } from '@/entities/post';
 
-// 4. 같은 feature 내부
-import { usePost } from '../hooks';
+// 4. Features
+import { BlogList } from '@/features/blog-post';
+
+// 5. Shared
+import { cn } from '@/shared/utils';
+import { Button } from '@/shared/ui';
 ```
-
----
-
-**🎯 FSD 마이그레이션 성공!** 이제 확장 가능하고 유지보수가 쉬운 코드베이스를 갖추었습니다! 🚀

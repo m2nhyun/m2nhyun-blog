@@ -88,10 +88,11 @@ app/
 ```
 widgets/
 ├── header/
-│   ├── ui/Header.tsx
+│   ├── Header.tsx
+│   ├── Sidebar.tsx
 │   └── index.ts
 └── footer/
-    ├── ui/Footer.tsx
+    ├── Footer.tsx
     └── index.ts
 ```
 
