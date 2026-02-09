@@ -5,8 +5,62 @@ import { Footer } from '@/widgets/footer';
 import { ThemeProvider } from '@/features/theme';
 
 export const metadata: Metadata = {
-    title: 'Blog',
-    description: '김민현의 블로그',
+    title: {
+        default: '김민현 블로그 | Minhyun Blog',
+        template: '%s | 김민현 블로그',
+    },
+    description:
+        '프론트엔드 개발자 김민현의 기술 블로그입니다. React, TypeScript, Next.js 등 웹 개발 관련 글을 공유합니다.',
+    keywords: [
+        '프론트엔드',
+        '개발자',
+        'React',
+        'TypeScript',
+        'Next.js',
+        '블로그',
+        '웹개발',
+    ],
+    authors: [{ name: '김민현', url: 'https://m2nhyun-blog.vercel.app' }],
+    creator: '김민현',
+    publisher: '김민현',
+    metadataBase: new URL('https://m2nhyun-blog.vercel.app'),
+    openGraph: {
+        type: 'website',
+        locale: 'ko_KR',
+        url: 'https://m2nhyun-blog.vercel.app',
+        siteName: '김민현 블로그',
+        title: '김민현 블로그 | Minhyun Blog',
+        description:
+            '프론트엔드 개발자 김민현의 기술 블로그입니다. React, TypeScript, Next.js 등 웹 개발 관련 글을 공유합니다.',
+        images: [
+            {
+                url: '/og-image.png',
+                width: 1200,
+                height: 630,
+                alt: '김민현 블로그',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: '김민현 블로그 | Minhyun Blog',
+        description: '프론트엔드 개발자 김민현의 기술 블로그입니다.',
+        images: ['/og-image.png'],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    verification: {
+        google: 'your-google-verification-code',
+    },
 };
 
 export default function RootLayout({
@@ -15,7 +69,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="ko" suppressHydrationWarning>
             <body className="flex flex-col min-h-screen">
                 <ThemeProvider>
                     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-800 text-black dark:text-white">

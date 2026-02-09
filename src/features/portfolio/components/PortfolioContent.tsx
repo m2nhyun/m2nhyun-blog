@@ -2,25 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
-
-// TODO: entities/portfolio-item에서 타입 import 예정
-interface PortfolioItem {
-    id: string;
-    title: string;
-    description: string;
-    image?: string;
-    technologies: string[];
-    githubUrl?: string;
-    liveUrl?: string;
-    category: 'web' | 'mobile' | 'desktop' | 'library';
-    featured: boolean;
-    createdAt: string;
-}
+import { PortfolioItem } from '@/entities/portfolio-item';
+import { getPortfolioItems } from '../services/portfolioService';
 
 export const PortfolioContent = () => {
     const [projects, setProjects] = useState<PortfolioItem[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const categories = [
         { value: 'all', label: '전체' },
@@ -28,65 +17,17 @@ export const PortfolioContent = () => {
         { value: 'mobile', label: '모바일' },
         { value: 'desktop', label: '데스크톱' },
         { value: 'library', label: '라이브러리' },
+        { value: 'design', label: '디자인' },
     ];
 
     useEffect(() => {
-        // TODO: services에서 포트폴리오 목록 가져오기 로직 구현
         const fetchProjects = async () => {
             try {
-                // 임시 데이터
-                const mockProjects: PortfolioItem[] = [
-                    {
-                        id: '1',
-                        title: 'Minhyun Blog',
-                        description:
-                            'Next.js와 TypeScript를 사용하여 개발한 개인 블로그입니다. FSD 아키텍처를 적용하고 Firebase를 통한 실시간 데이터 관리, MDX 기반 포스팅 시스템을 구현했습니다.',
-                        technologies: [
-                            'Next.js',
-                            'TypeScript',
-                            'Tailwind CSS',
-                            'Firebase',
-                            'MDX',
-                        ],
-                        githubUrl: 'https://github.com/m2nhyun/blog',
-                        liveUrl: 'https://m2nhyun-blog.vercel.app/',
-                        category: 'web',
-                        featured: true,
-                        createdAt: '2024-01-01',
-                    },
-                    {
-                        id: '2',
-                        title: 'React Component Library',
-                        description:
-                            '재사용 가능한 React 컴포넌트 라이브러리입니다. Storybook을 활용한 문서화와 테스트를 포함하고 있습니다.',
-                        technologies: [
-                            'React',
-                            'TypeScript',
-                            'Storybook',
-                            'Rollup',
-                        ],
-                        githubUrl:
-                            'https://github.com/m2nhyun/react-components',
-                        category: 'library',
-                        featured: false,
-                        createdAt: '2023-12-01',
-                    },
-                    {
-                        id: '3',
-                        title: 'Mobile App Project',
-                        description:
-                            'React Native를 사용하여 개발한 크로스 플랫폼 모바일 애플리케이션입니다.',
-                        technologies: ['React Native', 'TypeScript', 'Expo'],
-                        githubUrl: 'https://github.com/m2nhyun/mobile-app',
-                        category: 'mobile',
-                        featured: true,
-                        createdAt: '2023-11-01',
-                    },
-                ];
-
-                setProjects(mockProjects);
-            } catch (error) {
-                console.error('Failed to fetch portfolio projects:', error);
+                const data = await getPortfolioItems(false);
+                setProjects(data);
+            } catch (err) {
+                console.error('Failed to fetch portfolio projects:', err);
+                setError('포트폴리오를 불러오는데 실패했습니다');
             } finally {
                 setIsLoading(false);
             }
@@ -110,6 +51,14 @@ export const PortfolioContent = () => {
                 <div className="text-gray-600 dark:text-gray-400">
                     로딩 중...
                 </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="text-center py-12">
+                <p className="text-red-500">{error}</p>
             </div>
         );
     }
@@ -197,7 +146,7 @@ interface ProjectCardProps {
 const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
     return (
         <div
-            className={`border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden 
+            className={`border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden
                         bg-white dark:bg-gray-800 hover:shadow-lg transition-shadow duration-300
                         ${featured ? 'lg:col-span-1' : ''}`}
         >
@@ -218,7 +167,7 @@ const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
                     </h3>
                     {project.featured && (
                         <span
-                            className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 
+                            className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900
                                        text-blue-800 dark:text-blue-200 rounded-full"
                         >
                             Featured
@@ -234,7 +183,7 @@ const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
                     {project.technologies.map((tech) => (
                         <span
                             key={tech}
-                            className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 
+                            className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700
                                      text-gray-700 dark:text-gray-300 rounded-md"
                         >
                             {tech}
@@ -248,20 +197,20 @@ const ProjectCard = ({ project, featured = false }: ProjectCardProps) => {
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-3 py-2 text-sm 
-                                     text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 
+                            className="flex items-center gap-2 px-3 py-2 text-sm
+                                     text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600
                                      rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                         >
                             <Github className="w-4 h-4" />
                             코드
                         </a>
                     )}
-                    {project.liveUrl && (
+                    {(project.liveUrl || project.demoUrl) && (
                         <a
-                            href={project.liveUrl}
+                            href={project.liveUrl || project.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-3 py-2 text-sm 
+                            className="flex items-center gap-2 px-3 py-2 text-sm
                                      bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                         >
                             <ExternalLink className="w-4 h-4" />
