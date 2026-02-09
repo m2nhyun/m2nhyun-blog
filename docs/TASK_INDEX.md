@@ -52,7 +52,94 @@ src/app/layout.tsx
 
 ---
 
+### DESIGN-001: 다크모드 깜빡임(FOUC) 수정
+| 항목 | 내용 |
+|------|------|
+| **설명** | 페이지 로드 시 다크모드 깜빡임 해결 |
+| **난이도** | 작음 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/app/layout.tsx
+src/features/theme/components/ThemeProvider.tsx
+src/app/globals.css
+```
+
+---
+
+### DESIGN-002: 레이아웃 시스템 개선
+| 항목 | 내용 |
+|------|------|
+| **설명** | 반응형 레이아웃 정상 동작하도록 max-width 수정 |
+| **난이도** | 중간 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/app/layout.tsx
+src/widgets/header/Header.tsx
+src/widgets/footer/Footer.tsx
+```
+
+---
+
 ## 🟡 P1 - 중요
+
+### DESIGN-003: 공통 UI 컴포넌트 정리
+| 항목 | 내용 |
+|------|------|
+| **설명** | 버튼, 입력 필드, 카드 등 공통 컴포넌트화 |
+| **난이도** | 큼 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/shared/ui/index.ts
+src/shared/ui/Skeleton.tsx
+src/features/blog-post/components/PostForm.tsx
+src/features/guestbook/components/GuestbookForm.tsx
+```
+
+---
+
+### DESIGN-004: 로딩/에러 상태 통일
+| 항목 | 내용 |
+|------|------|
+| **설명** | 스켈레톤 UI 적용 및 에러 상태 UI 통일 |
+| **난이도** | 중간 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/shared/ui/Skeleton.tsx
+src/features/blog-post/components/BlogList.tsx
+src/features/guestbook/components/GuestbookList.tsx
+src/features/portfolio/components/PortfolioContent.tsx
+```
+
+---
+
+### DESIGN-005: 방명록 UI 개선
+| 항목 | 내용 |
+|------|------|
+| **설명** | 방명록 레이아웃 및 카드 디자인 개선 |
+| **난이도** | 중간 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/features/guestbook/components/GuestbookContent.tsx
+src/features/guestbook/components/GuestbookList.tsx
+src/features/guestbook/components/GuestbookForm.tsx
+```
+
+---
 
 ### TASK-003: 마크다운 에디터 추가
 | 항목 | 내용 |
@@ -168,6 +255,40 @@ src/shared/constants/data.ts
 ---
 
 ## 🟢 P2 - 코드 품질
+
+### DESIGN-006: 헤더/푸터 정리
+| 항목 | 내용 |
+|------|------|
+| **설명** | 네비게이션 개선, 디버그 코드 제거, 스타일 통일 |
+| **난이도** | 작음 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/widgets/header/Header.tsx
+src/widgets/header/Sidebar.tsx
+src/widgets/footer/Footer.tsx
+src/shared/constants/data.ts
+```
+
+---
+
+### DESIGN-007: 색상 시스템 정리
+| 항목 | 내용 |
+|------|------|
+| **설명** | 일관된 색상 테마 적용 및 CSS 변수 정리 |
+| **난이도** | 중간 |
+| **상태** | ⬜ 미완료 |
+
+**읽어야 할 파일:**
+```
+docs/DESIGN_REFACTOR.md
+src/app/globals.css
+tailwind.config.ts
+```
+
+---
 
 ### TASK-009: 커스텀 훅 추출
 | 항목 | 내용 |
