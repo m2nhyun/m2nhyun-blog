@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
+import { createGuestbookEntry } from '../services/guestbookService';
 
 const guestbookFormSchema = z.object({
     name: z
@@ -43,13 +44,16 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
         setIsSubmitting(true);
 
         try {
-            // TODO: services에서 방명록 저장 API 호출
-            console.log('Guestbook data:', data);
+            await createGuestbookEntry({
+                name: data.name,
+                message: data.message,
+                email: data.email || undefined,
+            });
 
             form.reset();
             onComplete?.();
 
-            alert('방명록이 등록되었습니다!');
+            alert('방명록이 등록되었습니다! 관리자 승인 후 표시됩니다.');
         } catch (error) {
             console.error('Error submitting guestbook:', error);
             alert('방명록 등록 중 오류가 발생했습니다.');
@@ -70,7 +74,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                 <input
                     {...form.register('name')}
                     type="text"
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
                              focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="이름을 입력하세요"
@@ -89,7 +93,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                 <input
                     {...form.register('email')}
                     type="email"
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
                              focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="이메일 주소 (선택사항)"
@@ -108,7 +112,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
                 <textarea
                     {...form.register('message')}
                     rows={6}
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
                              focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
                     placeholder="방명록에 남길 메시지를 작성하세요"
@@ -126,7 +130,7 @@ export const GuestbookForm = ({ onComplete }: GuestbookFormProps) => {
             <button
                 type="submit"
                 disabled={isSubmitting || !form.formState.isValid}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400
                          text-white font-medium rounded-md transition-colors duration-200
                          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >

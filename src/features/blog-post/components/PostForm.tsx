@@ -51,6 +51,8 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
     const onSubmit = async (data: PostFormData) => {
         setIsSubmitting(true);
 
+        console.log(data);
+
         try {
             // slug 유효성 검사
             if (!validateSlug(data.slug)) {
