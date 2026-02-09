@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { GuestbookEntry } from '@/entities/guestbook-entry';
-import { getGuestbookEntries } from '../services/guestbookService';
+import { getGuestbookEntries } from '@/app/actions/guestbook';
 
 export const GuestbookList = () => {
     const [entries, setEntries] = useState<GuestbookEntry[]>([]);

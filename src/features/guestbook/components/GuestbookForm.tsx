@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
-import { createGuestbookEntry } from '../services/guestbookService';
+import { createGuestbookEntry } from '@/app/actions/guestbook';
 
 const guestbookFormSchema = z.object({
     name: z
