@@ -141,7 +141,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="프로젝트 이름을 입력하세요"
                 />
                 {form.formState.errors.title && (
@@ -160,7 +160,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                     rows={5}
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 resize-y"
                     placeholder="프로젝트 설명을 입력하세요"
                 />
                 {form.formState.errors.description && (
@@ -179,7 +179,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="React, TypeScript, Next.js"
                 />
                 <span className="text-xs text-gray-500">
@@ -201,7 +201,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         {...form.register('category')}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     >
                         {Object.entries(categoryLabels).map(
                             ([value, label]) => (
@@ -221,7 +221,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         {...form.register('status')}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     >
                         {Object.entries(statusLabels).map(([value, label]) => (
                             <option key={value} value={value}>
@@ -242,7 +242,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         type="url"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                         placeholder="https://github.com/..."
                     />
                 </div>
@@ -256,7 +256,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         type="url"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                         placeholder="https://..."
                     />
                 </div>
@@ -270,7 +270,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         type="url"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                         placeholder="https://..."
                     />
                 </div>
@@ -286,7 +286,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         type="date"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                 </div>
 
@@ -299,7 +299,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         type="date"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                 </div>
 
@@ -313,7 +313,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                         min="0"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                 </div>
             </div>
@@ -323,7 +323,7 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
                     <input
                         {...form.register('featured')}
                         type="checkbox"
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-gray-600 dark:text-gray-300 border-gray-300 rounded focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                     <span className="text-sm text-gray-900 dark:text-gray-100">
                         주요 프로젝트로 표시
@@ -334,9 +334,10 @@ export const PortfolioForm = ({ item, onComplete }: PortfolioFormProps) => {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400
-                         text-white font-medium rounded-md transition-colors duration-200
-                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                className="px-6 py-3 bg-gray-900 dark:bg-gray-100 hover:bg-gray-800 dark:hover:bg-gray-200
+                         text-white dark:text-gray-900 font-medium rounded-md transition-colors duration-200
+                         disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed
+                         focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
             >
                 {isSubmitting
                     ? isEditMode

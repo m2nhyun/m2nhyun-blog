@@ -16,7 +16,7 @@ export const CreatePost = () => {
             <div className="mb-8">
                 <button
                     onClick={() => router.push('/admin')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline mb-4"
+                    className="text-gray-700 dark:text-gray-300 hover:underline mb-4"
                 >
                     ← 관리자 대시보드로 돌아가기
                 </button>

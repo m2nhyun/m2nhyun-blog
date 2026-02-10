@@ -85,7 +85,7 @@ export const PortfolioManager = () => {
             <div className="mb-8">
                 <button
                     onClick={() => router.push('/admin')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline mb-4"
+                    className="text-gray-700 dark:text-gray-300 hover:underline mb-4"
                 >
                     ← 관리자 대시보드로 돌아가기
                 </button>
@@ -101,7 +101,7 @@ export const PortfolioManager = () => {
                     </div>
                     <Link
                         href="/admin/portfolio/new"
-                        className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                        className="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                     >
                         새 프로젝트 추가
                     </Link>
@@ -154,7 +154,7 @@ export const PortfolioManager = () => {
                                 >
                                     {statusLabels[item.status]}
                                 </span>
-                                <span className="px-2 py-0.5 text-xs bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 rounded">
+                                <span className="px-2 py-0.5 text-xs bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded">
                                     {categoryLabels[item.category]}
                                 </span>
                                 {item.featured && (
@@ -190,7 +190,7 @@ export const PortfolioManager = () => {
                             <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
                                 <Link
                                     href={`/admin/portfolio/${item.id}/edit`}
-                                    className="px-3 py-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                                    className="px-3 py-1 text-sm text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-300"
                                 >
                                     수정
                                 </Link>

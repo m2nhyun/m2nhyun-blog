@@ -59,7 +59,7 @@ export const EditPost = ({ postId }: EditPostProps) => {
                     </p>
                     <button
                         onClick={() => router.push('/admin/posts')}
-                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                        className="text-gray-700 dark:text-gray-300 hover:underline"
                     >
                         포스트 목록으로 돌아가기
                     </button>
@@ -73,7 +73,7 @@ export const EditPost = ({ postId }: EditPostProps) => {
             <div className="mb-8">
                 <button
                     onClick={() => router.push('/admin/posts')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline mb-4"
+                    className="text-gray-700 dark:text-gray-300 hover:underline mb-4"
                 >
                     ← 포스트 목록으로 돌아가기
                 </button>

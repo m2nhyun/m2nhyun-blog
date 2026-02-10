@@ -85,7 +85,7 @@ export const AdminContent = () => {
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             블로그 포스트를 작성, 수정, 삭제할 수 있습니다.
                         </p>
-                        <div className="text-blue-600 dark:text-blue-400 font-medium">
+                        <div className="text-gray-700 dark:text-gray-300 font-medium">
                             관리하기 →
                         </div>
                     </div>
@@ -103,7 +103,7 @@ export const AdminContent = () => {
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             방명록 메시지를 확인하고 관리할 수 있습니다.
                         </p>
-                        <div className="text-green-600 dark:text-green-400 font-medium">
+                        <div className="text-gray-700 dark:text-gray-300 font-medium">
                             관리하기 →
                         </div>
                     </div>
@@ -121,7 +121,7 @@ export const AdminContent = () => {
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             포트폴리오 프로젝트를 추가하고 관리할 수 있습니다.
                         </p>
-                        <div className="text-purple-600 dark:text-purple-400 font-medium">
+                        <div className="text-gray-700 dark:text-gray-300 font-medium">
                             관리하기 →
                         </div>
                     </div>
@@ -129,14 +129,14 @@ export const AdminContent = () => {
             </div>
 
             {/* 빠른 포스트 작성 */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
                     빠른 작업
                 </h2>
                 <div className="flex gap-4">
                     <Link
                         href="/admin/posts/new"
-                        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                        className="px-6 py-3 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                     >
                         새 포스트 작성
                     </Link>
@@ -164,7 +164,7 @@ export const AdminContent = () => {
                 ) : (
                     <div className="grid gap-4 md:grid-cols-4">
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                                 {stats?.publishedPosts || 0}
                                 <span className="text-sm font-normal text-gray-500">
                                     /{stats?.totalPosts || 0}
@@ -175,7 +175,7 @@ export const AdminContent = () => {
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                                 {stats?.totalGuestbook || 0}
                                 {stats && stats.pendingGuestbook > 0 && (
                                     <span className="text-sm font-normal text-yellow-500 ml-1">
@@ -188,7 +188,7 @@ export const AdminContent = () => {
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                                 {stats?.totalPortfolio || 0}
                             </div>
                             <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -196,7 +196,7 @@ export const AdminContent = () => {
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                                 {stats?.totalViews?.toLocaleString() || 0}
                             </div>
                             <div className="text-sm text-gray-600 dark:text-gray-400">

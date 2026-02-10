@@ -60,7 +60,7 @@ export const EditPortfolio = ({ itemId }: EditPortfolioProps) => {
                     </p>
                     <button
                         onClick={() => router.push('/admin/portfolio')}
-                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                        className="text-gray-700 dark:text-gray-300 hover:underline"
                     >
                         포트폴리오 목록으로 돌아가기
                     </button>
@@ -74,7 +74,7 @@ export const EditPortfolio = ({ itemId }: EditPortfolioProps) => {
             <div className="mb-8">
                 <button
                     onClick={() => router.push('/admin/portfolio')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline mb-4"
+                    className="text-gray-700 dark:text-gray-300 hover:underline mb-4"
                 >
                     ← 포트폴리오 목록으로 돌아가기
                 </button>

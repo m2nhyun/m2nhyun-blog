@@ -38,8 +38,10 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
         try {
             await loginWithEmail(data.email, data.password);
             onComplete?.();
-        } catch (error) {
-            console.log(error);
+        } catch {
+            setError(
+                '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.',
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -77,7 +79,7 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
                         type="email"
                         className="px-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md 
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                         placeholder="이메일을 입력하세요"
                     />
                     {form.formState.errors.email && (
@@ -97,7 +99,7 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
                             type={showPassword ? 'text' : 'password'}
                             className="w-full px-3 py-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-md 
                                      bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                     focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                     focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                             placeholder="비밀번호를 입력하세요"
                         />
                         <button
@@ -123,9 +125,10 @@ export const LoginForm = ({ onComplete }: LoginFormProps) => {
                 <button
                     type="submit"
                     disabled={isSubmitting || !form.formState.isValid}
-                    className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 
-                             text-white font-medium rounded-md transition-colors duration-200
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="w-full px-6 py-3 bg-gray-900 dark:bg-gray-100 hover:bg-gray-800 dark:hover:bg-gray-200
+                             text-white dark:text-gray-900 font-medium rounded-md transition-colors duration-200
+                             disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
                 >
                     {isSubmitting ? '로그인 중...' : '로그인'}
                 </button>

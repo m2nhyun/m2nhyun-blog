@@ -51,8 +51,6 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
     const onSubmit = async (data: PostFormData) => {
         setIsSubmitting(true);
 
-        console.log(data);
-
         try {
             // slug 유효성 검사
             if (!validateSlug(data.slug)) {
@@ -126,7 +124,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="포스트 제목을 입력하세요"
                 />
                 {form.formState.errors.title && (
@@ -145,7 +143,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 font-mono text-sm"
                     placeholder="my-first-blog-post"
                 />
                 {form.formState.errors.slug && (
@@ -165,7 +163,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     type="text"
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     placeholder="포스트 요약을 입력하세요"
                 />
             </div>
@@ -179,7 +177,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     rows={15}
                     className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                              bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y font-mono text-sm"
+                             focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 resize-y font-mono text-sm"
                     placeholder="포스트 내용을 작성하세요 (Markdown 지원)"
                 />
                 {form.formState.errors.content && (
@@ -199,7 +197,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                         type="text"
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                         placeholder="React, TypeScript, Next.js"
                     />
                     <span className="text-xs text-gray-500">
@@ -215,7 +213,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                         {...form.register('category')}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md 
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                 focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500"
                     >
                         <option value="">카테고리 선택</option>
                         <option value="frontend">프론트엔드</option>
@@ -231,7 +229,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     <input
                         {...form.register('featured')}
                         type="checkbox"
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-gray-600 dark:text-gray-300 border-gray-300 rounded focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                     <span className="text-sm text-gray-900 dark:text-gray-100">
                         주요 포스트로 설정
@@ -242,7 +240,7 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
                     <input
                         {...form.register('published')}
                         type="checkbox"
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-gray-600 dark:text-gray-300 border-gray-300 rounded focus:ring-gray-400 dark:focus:ring-gray-500"
                     />
                     <span className="text-sm text-gray-900 dark:text-gray-100">
                         바로 게시
@@ -253,9 +251,10 @@ export const PostForm = ({ post, onComplete }: PostFormProps) => {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 
-                         text-white font-medium rounded-md transition-colors duration-200
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-3 bg-gray-900 dark:bg-gray-100 hover:bg-gray-800 dark:hover:bg-gray-200
+                         text-white dark:text-gray-900 font-medium rounded-md transition-colors duration-200
+                         disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed
+                         focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
             >
                 {isSubmitting
                     ? isEditMode

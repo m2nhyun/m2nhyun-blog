@@ -89,7 +89,7 @@ export const GuestbookManager = () => {
             <div className="mb-8">
                 <button
                     onClick={() => router.push('/admin')}
-                    className="text-blue-600 dark:text-blue-400 hover:underline mb-4"
+                    className="text-gray-700 dark:text-gray-300 hover:underline mb-4"
                 >
                     ← 관리자 대시보드로 돌아가기
                 </button>
@@ -116,7 +116,7 @@ export const GuestbookManager = () => {
                         onClick={() => setFilter('all')}
                         className={`px-4 py-2 rounded-md text-sm transition-colors ${
                             filter === 'all'
-                                ? 'bg-blue-600 text-white'
+                                ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
                                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                         }`}
                     >
@@ -193,7 +193,7 @@ export const GuestbookManager = () => {
                                                 href={entry.website}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="ml-2 text-blue-500 hover:underline"
+                                                className="ml-2 text-gray-600 dark:text-gray-400 hover:underline"
                                             >
                                                 웹사이트
                                             </a>
