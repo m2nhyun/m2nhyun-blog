@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { PortfolioItem } from '@/entities/portfolio-item';
 import { getPortfolioItems } from '@/app/actions/portfolio';
+import { PortfolioGridSkeleton, Skeleton } from '@/shared/ui';
 
 export const PortfolioContent = () => {
     const [projects, setProjects] = useState<PortfolioItem[]>([]);
@@ -47,18 +48,35 @@ export const PortfolioContent = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center py-12">
-                <div className="text-gray-600 dark:text-gray-400">
-                    로딩 중...
+            <div className="max-w-6xl mx-auto space-y-12">
+                <div className="text-center">
+                    <Skeleton className="h-10 w-40 mx-auto mb-4" />
+                    <Skeleton className="h-6 w-80 mx-auto" />
                 </div>
+                <PortfolioGridSkeleton />
             </div>
         );
     }
 
+    const handleRetry = () => {
+        setError(null);
+        setIsLoading(true);
+        getPortfolioItems(false)
+            .then(setProjects)
+            .catch(() => setError('포트폴리오를 불러오는데 실패했습니다'))
+            .finally(() => setIsLoading(false));
+    };
+
     if (error) {
         return (
-            <div className="text-center py-12">
-                <p className="text-red-500">{error}</p>
+            <div className="max-w-6xl mx-auto text-center py-12">
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+                <button
+                    onClick={handleRetry}
+                    className="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm"
+                >
+                    다시 시도
+                </button>
             </div>
         );
     }

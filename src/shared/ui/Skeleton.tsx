@@ -93,3 +93,30 @@ export const PortfolioGridSkeleton = () => {
         </div>
     );
 };
+
+export const BlogDetailSkeleton = () => {
+    return (
+        <div className="max-w-4xl mx-auto">
+            <Skeleton className="h-5 w-32 mb-6" />
+            <Skeleton className="h-10 w-3/4 mb-4" />
+            <div className="flex gap-4 mb-6">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-4 w-16" />
+            </div>
+            <div className="flex gap-2 mb-8">
+                <Skeleton className="h-6 w-16 rounded-full" />
+                <Skeleton className="h-6 w-20 rounded-full" />
+            </div>
+            <div className="space-y-4">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-4/5" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+            </div>
+        </div>
+    );
+};

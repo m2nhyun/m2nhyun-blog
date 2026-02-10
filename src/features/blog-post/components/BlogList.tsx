@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getPosts } from '@/app/actions/post';
 import { Post } from '@/entities/post';
+import { PostListSkeleton } from '@/shared/ui';
 
 export const BlogList = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -28,23 +29,19 @@ export const BlogList = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center py-12">
-                <div className="text-gray-600 dark:text-gray-400">
-                    포스트를 불러오는 중...
-                </div>
+            <div className="max-w-4xl mx-auto">
+                <PostListSkeleton />
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="text-center py-12">
-                <div className="text-red-600 dark:text-red-400 mb-4">
-                    {error}
-                </div>
+            <div className="max-w-4xl mx-auto text-center py-12">
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
                 <button
                     onClick={() => window.location.reload()}
-                    className="text-gray-700 dark:text-gray-300 hover:underline"
+                    className="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm"
                 >
                     다시 시도
                 </button>

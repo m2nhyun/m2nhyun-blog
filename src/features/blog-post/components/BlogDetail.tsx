@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getPostBySlug, incrementViews } from '@/app/actions/post';
 import { Post } from '@/entities/post';
+import { BlogDetailSkeleton } from '@/shared/ui';
 
 interface BlogDetailProps {
     slug: string;
@@ -41,13 +42,7 @@ export const BlogDetail = ({ slug }: BlogDetailProps) => {
     }, [slug]);
 
     if (isLoading) {
-        return (
-            <div className="flex justify-center items-center py-12">
-                <div className="text-gray-600 dark:text-gray-400">
-                    포스트를 불러오는 중...
-                </div>
-            </div>
-        );
+        return <BlogDetailSkeleton />;
     }
 
     if (error || !post) {
